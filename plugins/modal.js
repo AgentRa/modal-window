@@ -94,20 +94,3 @@ $.modal = function (options) {
 }
 
 
-/* TODO
-option {
-  title: string  +
-  closable: boolean  +
-  content: string  +
-  width: string ('400px')  +
-}
-destroy(): void +
-Окно должно закрываться +
---------------------------
-* setContent(html: string): void | PUBLIC   +
-* onClose(): void
-* onOpen(): void
-* beforeClose(): boolean
-----------------------
-* animate.css
- */
