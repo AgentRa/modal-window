@@ -35,20 +35,6 @@ const priceModal = $.modal({
   ]
 })
 
-const confirmModal = $.modal({
-  title: 'Вы уверены ?',
-  closable: true,
-  width: '400px',
-  footerButtons: [
-    {text: 'Отменить', type: 'secondary', handler() {
-        confirmModal.close()
-      }},
-    {text: 'Удалить', type: 'danger', handler() {
-        confirmModal.close()
-      }}
-  ]
-})
-
 document.addEventListener('click', event => {
   event.preventDefault()
   const btnType = event.target.dataset.btn
@@ -60,11 +46,16 @@ document.addEventListener('click', event => {
       <p>Цена на ${fruit.title}: <strong>${fruit.price}$</strong></p>
     `)
     priceModal.open()
-  } else if (btnType === 'remove') {
-    confirmModal.setContent(`
-      <p>Вы удаляете фрукт: <strong>${fruit.title}</strong></p>
-    `)
-    confirmModal.open()
+  }  else if (btnType === 'remove') {
+    $.confirm({
+      title: 'Вы уверены ?',
+      content: `<p>Вы удаляете фрукт: <strong>${fruit.title}</strong></p>`
+    }).then(() => {
+      fruits = fruits.filter(f => f.id !== id)
+      render()
+    }).catch(() => {
+      console.log('Cancel')
+    })
   }
 })
 
