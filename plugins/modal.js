@@ -1,16 +1,16 @@
 function _createModal(options) {
+  const DEFAULT_WIDTH = '600px'
   const modal = document.createElement('div')
   modal.classList.add('vmodal')
   modal.insertAdjacentHTML('afterbegin', `
   <div class="modal-overlay">
-    <div class="modal-window">
+    <div class="modal-window" style="width: ${options.width || DEFAULT_WIDTH}">
       <div class="modal-header">
-        <span class="modal-title">Modal title</span>
-        <span class="modal-close">&times;</span>
+        <span class="modal-title">${options.title || 'Окно'}</span>
+        ${options.closable ? `<span class="modal-close">&times;</span>` : ''}
       </div>
       <div class="modal-body">
-        <p>Lorem ipsum dolor sit.</p>
-        <p>Lorem ipsum dolor sit.</p>
+        ${options.content || ''}
       </div>
       <div class="modal-footer">
         <button>Ok</button>
@@ -48,10 +48,12 @@ $.modal = function (options) {
 
 
 /* TODO
-title: string
-closable: boolean
-content: string
-width: string ('400px')
+option {
+  title: string  +
+  closable: boolean  +
+  content: string  +
+  width: string ('400px')  +
+}
 destroy(): void
 Окно должно закрываться
 --------------------------
